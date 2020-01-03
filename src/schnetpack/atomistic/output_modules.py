@@ -67,7 +67,7 @@ class Atomwise(nn.Module):
 
     def __init__(
         self,
-        n_in,
+        n_in=None,
         n_out=1,
         aggregation_mode="sum",
         n_layers=2,
@@ -107,6 +107,8 @@ class Atomwise(nn.Module):
 
         # build output network
         if outnet is None:
+            if n_in is None:
+                raise TypeError("n_in must be an integer when outnet is unspecified.")
             self.out_net = nn.Sequential(
                 schnetpack.nn.base.GetItem("representation"),
                 schnetpack.nn.blocks.MLP(n_in, n_out, n_neurons, n_layers, activation),
