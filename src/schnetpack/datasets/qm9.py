@@ -56,6 +56,24 @@ class QM9(DownloadableAtomsData):
     G = "free_energy"
     Cv = "heat_capacity"
 
+    properties = {
+        "A": "rotational_constant_A",
+        "B": "rotational_constant_B",
+        "C": "rotational_constant_C",
+        "mu": "dipole_moment",
+        "alpha": "isotropic_polarizability",
+        "homo": "homo",
+        "lumo": "lumo",
+        "gap": "gap",
+        "r2": "electronic_spatial_extent",
+        "zpve": "zpve",
+        "U0": "energy_U0",
+        "U": "energy_U",
+        "H": "enthalpy_H",
+        "G": "free_energy",
+        "Cv": "heat_capacity",
+    }
+
     reference = {zpve: 0, U0: 1, U: 2, H: 3, G: 4, Cv: 5}
 
     def __init__(
