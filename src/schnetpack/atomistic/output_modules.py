@@ -124,8 +124,6 @@ class Atomwise(nn.Module):
             self.atom_pool = schnetpack.nn.base.Aggregate(axis=1, mean=False)
         elif aggregation_mode == "avg":
             self.atom_pool = schnetpack.nn.base.Aggregate(axis=1, mean=True)
-        elif aggregation_mode is None:
-            self.atom_pool = lambda x, y: x
         else:
             raise AtomwiseError(
                 "{} is not a valid aggregation " "mode!".format(aggregation_mode)
