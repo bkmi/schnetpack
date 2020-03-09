@@ -28,7 +28,7 @@ class Atomwise(nn.Module):
     Args:
         n_in (int): input dimension of representation
         n_out (int): output dimension of target property (default: 1)
-        aggregation_mode (str): one of {sum, avg} (default: sum)
+        aggregation_mode (str): one of {'sum', 'avg', None} (default: sum)
         n_layers (int): number of nn in output network (default: 2)
         n_neurons (list of int or None): number of neurons in each layer of the output
             network. If `None`, divide neurons by 2 in each layer. (default: None)
@@ -124,6 +124,8 @@ class Atomwise(nn.Module):
             self.atom_pool = schnetpack.nn.base.Aggregate(axis=1, mean=False)
         elif aggregation_mode == "avg":
             self.atom_pool = schnetpack.nn.base.Aggregate(axis=1, mean=True)
+        elif aggregation_mode is None:
+            self.atom_pool = torch.nn.Identity()
         else:
             raise AtomwiseError(
                 "{} is not a valid aggregation " "mode!".format(aggregation_mode)
